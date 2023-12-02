@@ -63,7 +63,7 @@ def bernouli_gradient_descent(
     target_function,
     x_start,
     model,
-    learning_rate=0.01,
+    learning_rate=0.0001,
     pow_param=1.0 / 2.0,
     check_period=10,
 ):
@@ -92,7 +92,7 @@ def bernouli_gradient_descent(
 def gradient_descent(
     target_function,
     x_start,
-    learning_rate=0.01,
+    learning_rate=0.001,
 ):
     x = x_start
 
@@ -117,6 +117,8 @@ def gradient_descent(
 
 # build_prob_tree(tree, X_data)
 
-# for x in X_data:
+# for i in range(100):
+#     x = np.random.uniform(0, 5, (1,1))
 #     print(tree.predict(x.reshape(1, -1))[0])
+
 # %%
