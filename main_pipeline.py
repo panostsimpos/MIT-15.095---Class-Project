@@ -6,9 +6,18 @@ from matplotlib import pyplot as plt
 import tools
 import sklearn
 
-
 # %%
+from target_functions import rastrigin
+from tools import gradient_descent
+import numpy as np
 
+x_init = np.array([1.0, 1.0, 1.0])
+
+x = gradient_descent(rastrigin, x_init, 0.01)
+
+print(x)
+print(rastrigin(x))
+exit()
 # Define the domain
 
 lower_bound = -10
