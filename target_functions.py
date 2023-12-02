@@ -1,8 +1,8 @@
 import autograd.numpy as autonp
 import numpy as np
 
-def rastrigin(x, A=10.0, b=1.0):
 
+def rastrigin(x, A=10.0, b=1.0):
     n = x.shape[0]
     pi = np.pi
 
@@ -12,4 +12,3 @@ def rastrigin(x, A=10.0, b=1.0):
     res = A * n + autonp.sum(x_square_part - A * x_cos_part)
 
     return res
-
