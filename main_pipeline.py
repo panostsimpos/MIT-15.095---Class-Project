@@ -6,10 +6,10 @@ from matplotlib import pyplot as plt
 import tools
 import sklearn
 
-
 # %%
-
-# Define parameters
+from target_functions import rastrigin
+from tools import gradient_descent
+import numpy as np
 
 lower_bound = -10
 upper_bound = 10
