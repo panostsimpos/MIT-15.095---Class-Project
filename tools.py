@@ -1,10 +1,9 @@
 # %%
 import numpy as np
-import sklearn
-from sklearn.tree import DecisionTreeRegressor
 import numpy as np
 from autograd import grad
 import tools
+import target_functions
 
 
 def build_prob_tree(tree, data):
@@ -21,7 +20,12 @@ def build_prob_tree(tree, data):
 
 
 def descent_results_to_scores(descent_results, power=1.0):
-    return (1 / descent_results) ** (-power)
+    return np.array(
+        [
+            target_functions.rastrigin(descent_point) ** (-power)
+            for descent_point in descent_results
+        ]
+    )
 
 
 def gradient_step(target_function, x, learning_rate):
@@ -53,7 +57,7 @@ def decide_bernouli_gradient(mu):
 
 
 def is_optimal(x, epsilon=1e-6):
-    if tools.rastrigin(x) < epsilon:
+    if target_functions.rastrigin(x) < epsilon:
         return True
     else:
         return False
