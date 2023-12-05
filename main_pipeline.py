@@ -11,8 +11,7 @@ from sklearn.tree import DecisionTreeRegressor
 lower_bound = -10
 upper_bound = 10
 n_dim = 10
-n_samples = 1000
-n_new_samples = 3000
+n_new_samples, n_samples = 3000, 3000
 mu = 1.0  # probability of bernouli gradient descent
 n_algorithm_iteration = 2000
 # max_leaves = 10
@@ -80,7 +79,7 @@ for i in tqdm(range(n_algorithm_iteration)):
     new_y_samples = numpy.array(new_y_samples)
 
     if len(new_x_samples) == 0:
-        # print("No new data generated in run " + str(i) + ".")
+        print("No new data generated in run " + str(i) + ".")
         continue
     # Add new samples to the old ones
     x_samples = numpy.vstack((x_samples, new_x_samples))
