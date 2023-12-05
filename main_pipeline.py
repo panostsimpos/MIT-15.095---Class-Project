@@ -2,6 +2,7 @@
 import numpy
 import target_functions
 from matplotlib import pyplot as plt
+from tqdm import tqdm
 import tools
 from sklearn.tree import DecisionTreeRegressor
 
@@ -9,11 +10,13 @@ from sklearn.tree import DecisionTreeRegressor
 
 lower_bound = -10
 upper_bound = 10
-n_dim = 2
-n_samples = 200
-n_new_samples = 100
-mu = 0.5  # probability of bernouli gradient descent
-n_algorithm_iteration = 1000
+n_dim = 10
+n_samples = 1000
+n_new_samples = 3000
+mu = 1.0  # probability of bernouli gradient descent
+n_algorithm_iteration = 2000
+# max_leaves = 10
+max_points_per_bucket = 50
 
 # Initialize
 x_samples = numpy.random.uniform(lower_bound, upper_bound, (n_samples, n_dim))
@@ -26,8 +29,8 @@ descent_scores = tools.descent_results_to_scores(descent_results)
 best_sample = descent_results[0]
 
 # main loop
-for i in range(n_algorithm_iteration):
-    tree = DecisionTreeRegressor()
+for i in tqdm(range(n_algorithm_iteration)):
+    tree = DecisionTreeRegressor(max_leaf_nodes=len(x_samples) // max_points_per_bucket)
     tree.fit(x_samples, descent_scores)
 
     tree = tools.build_prob_tree(tree, x_samples)  # in place modification
@@ -77,7 +80,7 @@ for i in range(n_algorithm_iteration):
     new_y_samples = numpy.array(new_y_samples)
 
     if len(new_x_samples) == 0:
-        print("No new data generated in run " + str(i) + ".")
+        # print("No new data generated in run " + str(i) + ".")
         continue
     # Add new samples to the old ones
     x_samples = numpy.vstack((x_samples, new_x_samples))

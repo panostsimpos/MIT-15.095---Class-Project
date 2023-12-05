@@ -68,8 +68,8 @@ def bernouli_gradient_descent(
     x_start,
     model,
     learning_rate=0.0001,
-    pow_param=1.0 / 2.0,
-    check_period=10,
+    pow_param=1.0 / 5.0,
+    check_period=30,
 ):
     x = x_start
 
