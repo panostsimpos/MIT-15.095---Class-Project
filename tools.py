@@ -19,6 +19,14 @@ def build_prob_tree(tree, data):
     return tree
 
 
+def print_leaves(tree, data):
+    leaf_indices = tree.apply(data)
+    unique_leaf_indices = np.unique(leaf_indices)
+
+    for leaf_index in unique_leaf_indices:
+        print(tree.tree_.value[leaf_index, 0, 0])
+
+
 def descent_results_to_scores(descent_results, power=1.0):
     return np.array(
         [
