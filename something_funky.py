@@ -11,11 +11,11 @@ import time
 
 lower_bound = -10
 upper_bound = 10
-n_dim = 5
-n_new_samples, n_samples = 10000, 5000
-mu = 1.0  # probability of bernouli gradient descent
+n_dim = 2
+n_new_samples, n_samples = 15000, 500
+mu = 0.0  # probability of bernouli gradient descent
 n_algorithm_iteration = 200
-max_leaves = 40
+max_leaves = 20
 
 # Initialize
 x_samples = numpy.random.uniform(lower_bound, upper_bound, (n_samples, n_dim))
@@ -23,7 +23,7 @@ descent_results = []
 for x_sample in x_samples:
     descent_results.append(tools.gradient_descent(target_functions.rastrigin, x_sample))
 descent_results = numpy.array(descent_results)
-descent_scores = tools.descent_results_to_scores(descent_results, power=15.0)
+descent_scores = tools.descent_results_to_scores(descent_results, power=5.0)
 
 best_sample = descent_results[0]
 
@@ -92,7 +92,7 @@ for i in tqdm(range(n_algorithm_iteration)):
     # Add new samples to the old ones
     x_samples = numpy.vstack((x_samples, new_x_samples))
     descent_scores = numpy.concatenate(
-        (descent_scores, tools.descent_results_to_scores(new_y_samples))
+        (descent_scores, tools.descent_results_to_scores(new_y_samples, power=5.0))
     )
 
     current_time = time.time()
@@ -135,7 +135,7 @@ plt.show()
 #     plt.colorbar()
 #     plt.show()
 
-# %%
+4  # %%
 # print("Leaves:", tools.print_leaves(tree, x_samples))
 # # print all x_samples in leaf with highest probability
 # leaf_indices = tree.apply(x_samples)
